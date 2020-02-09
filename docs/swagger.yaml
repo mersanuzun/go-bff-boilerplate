@@ -1,0 +1,82 @@
+definitions:
+  shared.AppInformation:
+    properties:
+      appName:
+        type: string
+      env:
+        type: string
+      version:
+        type: string
+    type: object
+  shared.AppStatus:
+    properties:
+      status:
+        type: string
+    type: object
+  todo.GetTodoResponse:
+    properties:
+      completed:
+        type: boolean
+      id:
+        type: integer
+      title:
+        type: string
+      userId:
+        type: integer
+    type: object
+info:
+  contact: {}
+  license: {}
+paths:
+  /_monitoring/health:
+    get:
+      consumes:
+      - application/json
+      description: Get App Health
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/shared.AppStatus'
+      summary: Get App Health
+      tags:
+      - Monitoring
+  /_monitoring/info:
+    get:
+      consumes:
+      - application/json
+      description: Get App Info
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/shared.AppInformation'
+      summary: Get App Info
+      tags:
+      - Monitoring
+  /todos/{todo}:
+    get:
+      consumes:
+      - application/json
+      description: Get A Todo
+      parameters:
+      - description: fileName
+        in: path
+        name: todo
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/todo.GetTodoResponse'
+      summary: Get A Todo
+      tags:
+      - Cargo Desi
+swagger: "2.0"
